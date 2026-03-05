@@ -3,27 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Greenminer | Economía Circular</title>
+    <title>Greenminer | Datos de Reciclaje Chile</title>
     <style>
-        body { font-family: 'Helvetica', Arial, sans-serif; margin: 0; display: flex; align-items: center; justify-content: center; height: 100vh; background-color: #ffffff; color: #1a3c15; }
-        .card { text-align: center; padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); max-width: 500px; }
-        .logo { font-size: 3.5rem; font-weight: 800; letter-spacing: -2px; margin-bottom: 10px; }
-        .green { color: #004d26; } /* Verde oscuro de tu logo */
-        .miner { color: #a2d149; } /* Verde claro de tu logo */
-        .leaf { color: #4caf50; display: inline-block; transform: rotate(-15deg); }
-        h1 { font-size: 1.5rem; color: #333; margin-top: 20px; font-weight: 400; }
-        p { color: #666; font-size: 1.1rem; line-height: 1.6; }
-        .btn { margin-top: 30px; display: inline-block; padding: 12px 25px; background: linear-gradient(to right, #004d26, #a2d149); color: white; text-decoration: none; border-radius: 50px; font-weight: bold; }
+        :root { --verde-paz: #2d5a27; --tech-gray: #f4f7f6; --accent: #78a96d; }
+        body { background-color: var(--tech-gray); font-family: 'Segoe UI', sans-serif; margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; color: #333; }
+        .canvas { width: 900px; display: flex; align-items: center; justify-content: space-between; gap: 40px; }
+        
+        /* Círculo dinámico del croquis */
+        .orbit-container { position: relative; width: 400px; height: 400px; border: 1px solid rgba(45,90,39,0.1); border-radius: 50%; }
+        .node { position: absolute; width: 90px; height: 90px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 0.75rem; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: 0.3s; border: 1px solid #eee; }
+        .node:hover { transform: scale(1.1); border-color: var(--verde-paz); color: var(--verde-paz); font-weight: bold; }
+        
+        .n1 { top: -20px; left: 155px; } /* Estadísticas */
+        .n2 { top: 155px; right: -20px; } /* Tipos */
+        .n4 { bottom: -20px; left: 155px; } /* Valores */
+        .n5 { top: 155px; left: -20px; } /* Centros */
+
+        /* Cuadro de Información (derecha) */
+        .info-box { width: 400px; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border-left: 6px solid var(--verde-paz); }
+        .info-box h2 { color: var(--verde-paz); margin-top: 0; }
+        .data-content { line-height: 1.6; font-size: 0.95rem; }
     </style>
 </head>
 <body>
-    <div class="card">
-        <div class="logo">
-            <span class="green">Green</span><span class="miner">miner</span><span class="leaf">🍃</span>
+    <div class="canvas">
+        <div class="orbit-container">
+            <div class="node n1" onclick="show('Estadísticas en Chile', 'Solo se recicla el 1% de residuos municipales. Hay un mercado gigante esperando soluciones verdes.')">Estadísticas</div>
+            <div class="node n2" onclick="show('Tipos de Reciclaje', 'Desde baterías de litio hasta chatarra pesada. Clasificación técnica para minería.')">Tipos</div>
+            <div class="node n4" onclick="show('Valores de Mercado', 'Cobre: $8.200/kg aprox. Actualizamos precios para que el reciclador consulte.')">Valores</div>
+            <div class="node n5" onclick="show('Centros de Acopio', 'Red de puntos autorizados. Información clave para ganar visitas y confianza.')">Centros</div>
         </div>
-        <h1>Nueva vida a tus residuos</h1>
-        <p>Transformamos lo que otros descartan en oportunidades de negocio reales. El futuro es circular.</p>
-        <a href="m.varelamoraga@gmail.com" class="btn">Contáctanos</a>
+        
+        <div class="info-box" id="display">
+            <h2 id="title">Greenminer</h2>
+            <div class="data-content" id="desc">Alimenta la curiosidad. Selecciona un punto para ver datos clave de la minería verde.</div>
+        </div>
     </div>
+    <script>
+        function show(title, text) {
+            document.getElementById('title').innerText = title;
+            document.getElementById('desc').innerText = text;
+        }
+    </script>
 </body>
 </html>
